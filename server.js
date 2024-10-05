@@ -13,14 +13,22 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());  // This allows Express to parse JSON in POST requests
 
-// PostgreSQL Connection Pool
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'game',
-  password: '12345678',
-  port: 5432,
+  connectionString: process.env.DATABASE_URL, // Use an environment variable for your DB connection string
+  ssl: {
+    rejectUnauthorized: false, // Include this if needed for cloud services
+  },
 });
+
+
+// PostgreSQL Connection Pool
+// const pool = new Pool({
+//   user: 'postgres',
+//   host: 'localhost',
+//   database: 'game',
+//   password: '12345678',
+//   port: 5432,
+// });
 
 // Create the games table (run only once)
 pool.query(`
