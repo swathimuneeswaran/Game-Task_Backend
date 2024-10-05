@@ -79,18 +79,21 @@ app.post('/api/save-game', async (req, res) => {
   
 
   // Route to get all games
-app.get('/api/get-games', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT * FROM games');
-    res.status(200).json({ 
-      games: result.rows ,
-      message: 'Game datas fetched successfully'  // Return a success message along with the games data
-    });
-  } catch (error) {
-    console.error('Error fetching games:', error);
-    res.status(500).send({ message: 'Internal server error' });
-  }
-});
+  app.get('/api/get-games', async (req, res) => {
+    console.log("Received request to fetch games"); // Log the request
+    try {
+      const result = await pool.query('SELECT * FROM games');
+      console.log("Games fetched:", result.rows); // Log the fetched games
+      res.status(200).json({ 
+        games: result.rows,
+        message: 'Game data fetched successfully'
+      });
+    } catch (error) {
+      console.error('Error fetching games:', error);
+      res.status(500).send({ message: 'Internal server error' });
+    }
+  });
+  
 
 
 // Listen on a port
