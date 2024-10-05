@@ -7,18 +7,9 @@ const { Pool } = require('pg');
 const app = express();
 
 // Middleware with specific CORS origin
-const allowedOrigins = ['http://localhost:3000'];  // Add your allowed origins here
 
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
-}));
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());  // This allows Express to parse JSON in POST requests
 
