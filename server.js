@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { Pool } = require('pg');
+const dotenv =require('dotenv');
+dotenv.config()
 
 // Initialize the app
 const app = express();
