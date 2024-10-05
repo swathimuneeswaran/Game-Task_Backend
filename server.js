@@ -82,7 +82,10 @@ app.post('/api/save-game', async (req, res) => {
 app.get('/api/get-games', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM games');
-    res.status(200).json({ games: result.rows });
+    res.status(200).json({ 
+      games: result.rows ,
+      message: 'Game datas fetched successfully'  // Return a success message along with the games data
+    });
   } catch (error) {
     console.error('Error fetching games:', error);
     res.status(500).send({ message: 'Internal server error' });
