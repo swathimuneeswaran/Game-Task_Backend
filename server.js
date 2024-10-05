@@ -76,6 +76,18 @@ app.post('/api/save-game', async (req, res) => {
   });
   
 
+  // Route to get all games
+app.get('/api/get-games', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM games');
+    res.status(200).json({ games: result.rows });
+  } catch (error) {
+    console.error('Error fetching games:', error);
+    res.status(500).send({ message: 'Internal server error' });
+  }
+});
+
+
 // Listen on a port
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
